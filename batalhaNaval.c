@@ -22,7 +22,7 @@ int main() {
         tabuleiro[linhaH][colH + i] = 3;
     }
 
-    // Posiciona navio vertical, se couber e não houver sobreposição
+    // Posiciona navio vertical
     for (int i = 0; i < navio; i++) {
         tabuleiro[linhaV + i][colV] = 3;
     }
