@@ -1,42 +1,56 @@
 #include <stdio.h>
+#include <locale.h>
+
+#define TAM 10
+#define NAVIO 3
 
 int main() {
-    
-    char colunas[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G','H', 'I', 'J'};
-    int tabuleiro[10][10];
-    int navio = 3;
+    setlocale(LC_ALL, "Portuguese");
 
-    // Inicializa o tabuleiro com água (0)
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
+    char colunas[10] = {'A','B','C','D','E','F','G','H','I','J'};
+    int tabuleiro[TAM][TAM];
+
+    // Inicializa o tabuleiro com 0 (água)
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
             tabuleiro[i][j] = 0;
         }
     }
 
-    // Coordenadas dos navios
-    int linhaH = 2, colH = 4; // Horizontal a partir de (2,4)
-    int linhaV = 5, colV = 1; // Vertical a partir de (5,1)
-
-    // Posiciona navio horizontal
-    for (int i = 0; i < navio; i++) {
+    // === Navio horizontal  ===
+    int linhaH = 1, colH = 2;
+    for (int i = 0; i < NAVIO; i++) {
         tabuleiro[linhaH][colH + i] = 3;
     }
 
-    // Posiciona navio vertical
-    for (int i = 0; i < navio; i++) {
+    // === Navio vertical ===
+    int linhaV = 4, colV = 6;
+    for (int i = 0; i < NAVIO; i++) {
         tabuleiro[linhaV + i][colV] = 3;
     }
-    // Imprime o cabeçalho das colunas
+
+    // === Primerio Navio diagonal ===
+    int linhaD1 = 0, colD1 = 0;
+    for (int i = 0; i < NAVIO; i++) {
+        tabuleiro[linhaD1 + i][colD1 + i] = 3;
+    }
+
+    // === Segundo Navio diagonal  ===
+    int linhaD2 = 6, colD2 = 8;
+    for (int i = 0; i < NAVIO; i++) {
+        tabuleiro[linhaD2 + i][colD2 - i] = 3;
+    }
+
+    // === Impressão do tabuleiro ===
     printf("  ");
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < TAM; i++) {
         printf("%c ", colunas[i]);
     }
     printf("\n");
 
-    // Imprime o tabuleiro com numeração das linhas
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < TAM; i++) {
         printf("%d ", i);
-        for (int j = 0; j < 10; j++) {
+        for (int j = 0; j < TAM; j++) {
             printf("%d ", tabuleiro[i][j]);
         }
         printf("\n");
